@@ -1,0 +1,42 @@
+"""
+As I suffer from Multiple Sclerosis, I aimed at building a word cloud from the free wikipedia page tiled 'Multiple sclerosis' The result of my efforts was 100% fruitful.
+I have used and tested the scripts in Python 3.9 in Jupyter Notebook.
+  The outcome of my code is attached
+"""
+Installed the following packages
+1. wordcloud
+2. pillow (will later import is as PIL)
+3. wikipedia
+"""
+"""
+In my project text, I used scraped text from a Wikipedia page on ‘Multiple sclerosis’
+"""
+
+# Import package
+import wikipedia
+import re
+# Specify the title of the Wikipedia page
+wiki = wikipedia.page('Multiple sclerosis')
+# Extract the plain text content of the page
+text = wiki.content
+text = re.sub(r'==.*?==+', '', text)
+text = text.replace('\n', '')
+
+# Then, prepare a function that plots the word cloud
+# Imported package
+import matplotlib.pyplot as plt
+# Define a function to plot word cloud
+def plot_cloud(wordcloud):
+    # Set figure size
+    plt.figure(figsize=(40, 30))
+    # Display image
+    plt.imshow(wordcloud) 
+    # No axis details
+    plt.axis("off");
+#Then created the first word cloud and plotted it:
+# Import package
+from wordcloud import WordCloud, STOPWORDS
+# Generate word cloud
+wordcloud = WordCloud(width = 2500, height = 1500, random_state=1, background_color='blue', colormap='Pastel1', collocations=False, stopwords = STOPWORDS).generate(text)
+# Plot
+plot_cloud(wordcloud)
